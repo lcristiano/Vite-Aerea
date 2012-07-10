@@ -34,8 +34,6 @@ var d = MAP(mapping3)(domain3);
 
 var dPos = T([2])([1])(d)
 
-
-//Per un bug di plasm.js non si possono inserire nella struct 2 disk
 var base1 = STRUCT([b,dPos]) 
 
 //DRAW(base1)
@@ -60,21 +58,17 @@ var base2 = STRUCT([b2,d3,d4])
 
 var base = STRUCT([base1,base2])
 
-//DRAW(base)
-
 
 
 //box interno
 var box = T([0,1,2])([-2.5,-2.5,1])(CUBOID([5,5,5]))
-DRAW(box)
+DRAW(COLOR([230/255,190/255,135/255])(box))
 
 
 //Pilone
 
 var p = CYL_SURFACE([1,32])([100,1])
 var posPil = T([2])([6])(p)
-//DRAW(posPil)
-
 
 
 //Punta pilone
@@ -88,18 +82,17 @@ var mapping3 = function (p) {
   var z = p[2]; 
   return [z * r * COS(a), z * r * SIN(a), altezza - z]; 
 }; 
-var tappo = MAP(mapping3)(domain3); 
+var tip = MAP(mapping3)(domain3); 
 
-var posTappo = T([2])([38])(tappo)
+var posTip = T([2])([38])(tip)
  
-var pilone = STRUCT([posPil, posTappo])
-
-//DRAW(pilone)
+var pilone = STRUCT([posPil, posTip])
 
 
 
 
-//aste
+
+//Aste
 
 var supAsta = T([2])([1])(CYL_SURFACE([0.5, 6])([100,1]))
 
@@ -163,53 +156,35 @@ var domain3 = DOMAIN([[0,1],[0,1],[0,1]])([30,50])
 var sezMcp1 = [[0,0,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],
 [6,6.5,0],[6,6.5,0],[6,6.5,0],[6,6.5,0],[6,6.5,0],[6,6.5,0],[0.5,0,0]]
 var sezMc1 = BEZIER(S0)(sezMcp1);
-/*var sezMcurve1 = MAP(sezMc1)(domain);
-DRAW (sezMcurve1);
-DRAW(COLOR([0,1,1])(POLYLINE(sezMcp1)));*/
-
-
 
 var sezMcp2 = [[0,0,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],
 [6,7,0.5],[6,7,0.5],[6,7,0.5],
 [6,6.5,0.5],[6,6.5,0.5],[6,6.5,0.5],[6,6.5,0.5],[6,6.5,0.5],[6,6.5,0.5],[0.5,0,0.5]]
 var sezMc2 = BEZIER(S0)(sezMcp2);
-/*var sezMcurve2 = MAP(sezMc2)(domain);
-DRAW (sezMcurve2);
-DRAW(COLOR([0,1,1])(POLYLINE(sezMcp2)));*/
 
-
+//Surface 1
 var sup = BEZIER(S1)([sezMc1,sezMc2])
-
 var rSup = MAP(sup)(domain2)
-
-//DRAW(rSup)
-
 
 
 
 var bordP1 = [[0,0,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],[6,7,0],
 [6,7,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],[6,7,0.5],[0,0,0.5]]
 var bordC1 = BEZIER(S0)(bordP1);
-/*var bordCurve1 = MAP(bordC1)(domain);
-DRAW (bordCurve1);
-DRAW(COLOR([0,1,1])(POLYLINE(bordP1)));*/
+
 
 var bordP2 = [[0.5,0,0],[6,6.5,0],[6,6.5,0],[6,6.5,0],[6,6.5,0],[6,6.5,0],[6,6.5,0],[6,6.5,0],[6,6.5,0],[6,6.5,0],[6,6.5,0],
 [6,6.5,0.5],[6,6.5,0.5],[6,6.5,0.5],
 [6,6.5,0.5],[6,6.5,0.5],[6,6.5,0.5],[6,6.5,0.5],[6,6.5,0.5],[0.5,0,0.5]]
 var bordC2 = BEZIER(S0)(bordP2);
-/*var bordCurve2 = MAP(bordC2)(domain);
-DRAW (bordCurve2);
-DRAW(COLOR([0,1,1])(POLYLINE(bordP2)));*/
 
 
-
+//Surface 2
 var sup2 = BEZIER(S1)([bordC1,bordC2])
-
 var rSup2 = MAP(sup2)(domain2)
 
-//DRAW(rSup2)
 
+//Disegno struttura di travi
 
 var support = STRUCT([rSup,rSup2])
 
@@ -218,7 +193,6 @@ var supportPos = T([0,1,2])([-19,0.2,0.5])(S([0,2])([3,3])(R([1,2])([PI/2])(supp
 
 var supportStruct = STRUCT([supportPos, rotAste, supportPos, rotAste, supportPos, rotAste, supportPos])
 
-//DRAW(supportStruct)
 
 
 
@@ -231,7 +205,7 @@ var tapMod = T([2])([20])(DISK(2.5)([100,1]))
 var tapMod2 = T([2])([21.5])(DISK(2.5)([100,1]))
 
 
-DRAW(posMod)
+DRAW(COLOR([230/255,190/255,135/255])(posMod))
 DRAW(tapMod)
 DRAW(tapMod2)
 
@@ -240,7 +214,7 @@ DRAW(tapMod2)
 //Tiranti
 
 var tir1 = POLYLINE([[8.8,18,0],[11,13,36]])
-var tir2 = POLYLINE([[17.9,8,0],[21,3,29]])
+var tir2 = POLYLINE([[17.9,8,0],[21,3,29.3]])
 var tir3 = POLYLINE([[-12,16,0],[-11,13,34.3]])
 var tir4 = POLYLINE([[-17.8,8,0],[-21,3,25.8]])
 var tir5 = POLYLINE([[-8.8,-18,0],[-11,-13,32]])
@@ -256,16 +230,4 @@ DRAW(COLOR([0.5,0.5,0.5])(tirs))
 
 var vite = STRUCT([base,pilone,aste,sostegni,supportStruct])
 
-DRAW(COLOR([237/255,145/255,33/255])(vite))
-
-/*
-0 -> lunghezza
-1-> larghezza
-2-> profondità
-2 = z*r
-R = z * r
-z = 0 implica R = 0
-z = altezza implica R = altezza * r*/
-//0,2 -> y
-//1,2 -> x
-//0,1 - z
+DRAW(COLOR([237/255,180/255,100/255])(vite))
